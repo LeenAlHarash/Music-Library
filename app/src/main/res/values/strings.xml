@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Audio Library - TP2</string>
+    <string name="app_name" translatable="false">Audio Library - TP2</string>
+    <string name="bonjour">Bonjour %1$s !</string>
+    <string name="toastProfile">Veuillez entrer un nom</string>
+    <string name="inserez_votre_nom">Inserez votre nom :</string>
+    <string name="sauvegarder">Sauvegarder</string>
+    <string name="bienvenue">Bienvenue !</string>
+    <string name="voir_votre_librarie">Voir votre librarie</string>
+    <string name="ajouter_une_chanson">Ajouter une chanson</string>
 </resources>

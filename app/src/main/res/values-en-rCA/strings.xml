@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bonjour">Welcome %1$s !</string>
+    <string name="toastProfile">Please enter a name</string>
+    <string name="inserez_votre_nom">Input your name:</string>
+    <string name="sauvegarder">Save</string>
+    <string name="bienvenue">Welcome !</string>
+    <string name="voir_votre_librarie">View your library</string>
+    <string name="ajouter_une_chanson">Add a song</string>
+</resources>

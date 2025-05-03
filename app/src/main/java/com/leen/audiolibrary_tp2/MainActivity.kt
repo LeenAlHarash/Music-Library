@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             val nom = afficherNom.text.toString()
             //Toast pour forcer l'utilisateur à entrer un nom
             if (nom.isEmpty()) {
-                Toast.makeText(this, "Veuillez entrer un nom", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.toastProfile), Toast.LENGTH_SHORT).show()
             } else {
                 Log.d(TAG, "btnEnvoyer onClick : $nom")
                 val intent = Intent(this, PageAccueil::class.java)
