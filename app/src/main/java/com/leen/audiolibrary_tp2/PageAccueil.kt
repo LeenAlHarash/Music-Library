@@ -37,7 +37,7 @@ class PageAccueil : AppCompatActivity() {
         val nom = intent.getStringExtra("nom")
         Log.d(TAG, "onCreate : $nom")
         val tvMessage = findViewById<TextView>(R.id.tvWelcome)
-        tvMessage.text = "Bonjour $nom !" //appeler le nom de l'utilisateur
+        tvMessage.text = getString(R.string.bonjour, nom) //appeler le nom de l'utilisateur
 
 
         //Pour passer à la page formulaire
