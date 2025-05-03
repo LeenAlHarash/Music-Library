@@ -23,4 +23,4 @@
 | ------------- | ------------- |
 | Leen | - Création de la page Profile<br/> - Création de la page accueil<br /> - Internalisation de ces deux pages<br/> - Création de la page librarie<br /> - Création de la page formulaire<br/> - Liaison entre toutes les pages<br/> - Supprimer une chanson<br /> - Tests Unitaires (supprimer)|
 | Mariyam | - Création du formulaire pour l'ajout d'une chanson <br/> - Modification d'une chanson<br /> - Internalisation du formulaire<br /> - Tests Unitaires (Modifier et ajouter un chanson)<br /> - Création des tables SQL|
-| Jaskaran | - Fonction Recherche par nom de la chanson<br /> - Filtre par genre et par artist<br /> - Internalisation des chansons (librarie)<br /> - Tests Unitaires (pour rechercher)<br /> - Thème sombre et clair|
+| Jaskaran | - Afficher la liste des chansons (recyclerView)<br /> - Fonction Recherche par nom de la chanson<br /> - Filtre par genre et par artist<br /> - Internalisation des chansons (librarie)<br /> - Tests Unitaires (pour rechercher)<br /> - Thème sombre et clair|
