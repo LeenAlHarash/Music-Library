@@ -26,6 +26,12 @@
             android:name=".PageAccueil"
             android:exported="true">
         </activity>
+
+        <!--Pour passer à la pageFormulaire-->
+        <activity
+            android:name=".PageFormulaire"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
