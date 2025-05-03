@@ -42,11 +42,6 @@ class PageFormulaire : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_formulaire)
 
-        //pour afficher les 3 boutons
-        val btnProfile = findViewById<Button>(R.id.btnProfile)
-        val btnAccueil = findViewById<Button>(R.id.btnAccueil)
-        val btnLibrarie = findViewById<Button>(R.id.btnLibrarie)
-
         //les fonctionnalités des boutons
         //Page Profile
         val btnEnvoyer1 = findViewById<Button>(R.id.btnProfile)
@@ -56,7 +51,7 @@ class PageFormulaire : AppCompatActivity() {
             mainActivityLauncher.launch(intent)
         }
 
-        //Page Profile
+        //Page Accueil
         val btnEnvoyer2 = findViewById<Button>(R.id.btnAccueil)
         btnEnvoyer2.setOnClickListener {
             //récupérer le nom sauvegardé
@@ -68,10 +63,10 @@ class PageFormulaire : AppCompatActivity() {
             pageAccueilLauncher.launch(intent)
         }
 
-        //Page Profile
+        //Page Librarie
         val btnEnvoyer3 = findViewById<Button>(R.id.btnLibrarie)
         btnEnvoyer3.setOnClickListener {
-            Log.d(TAG, "btnEnvoyer onClick revenir page profile")
+            Log.d(TAG, "btnEnvoyer onClick revenir page librarie")
             val intent = Intent(this, PageLibrarie::class.java)
             pageLibrarieLauncher.launch(intent)
         }

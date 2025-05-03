@@ -11,8 +11,16 @@ import androidx.appcompat.app.AppCompatActivity
 
 class PageAccueil : AppCompatActivity() {
 
-    //pour appeler la page formulaire
+    //pour appeler la page formulaire et librarie
     private val pageFormulaireLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK){
+            val retour = result.data?.getStringExtra("resultat")
+            Log.d(TAG, "Résultat: $retour")
+        }
+    }
+    private val pageLibrarieLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == RESULT_OK){
@@ -39,6 +47,14 @@ class PageAccueil : AppCompatActivity() {
             Log.d(TAG, "btnEnvoyer onClick Ajouter Chanson")
             val intent = Intent(this, PageFormulaire::class.java)
             pageFormulaireLauncher.launch(intent)
+        }
+
+        //Page Librarie
+        val btnEnvoyer3 = findViewById<Button>(R.id.btnViewLibrary)
+        btnEnvoyer3.setOnClickListener {
+            Log.d(TAG, "btnEnvoyer onClick page librarie")
+            val intent = Intent(this, PageLibrarie::class.java)
+            pageLibrarieLauncher.launch(intent)
         }
     }
 

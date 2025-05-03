@@ -32,6 +32,12 @@
             android:name=".PageFormulaire"
             android:exported="true">
         </activity>
+
+        <!--Pour passer à la pageLibrarie-->
+        <activity
+            android:name=".PageLibrarie"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
