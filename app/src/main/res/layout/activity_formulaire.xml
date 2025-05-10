@@ -41,4 +41,86 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.97" />
+
+    <TextView
+        android:id="@+id/tv_titre_formulaire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Ajouter une chanson"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_nom_chanson"
+        android:layout_width="240dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="Entrez le nom de la chanson"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_nom_chanson"
+        app:layout_constraintStart_toStartOf="@+id/spinner_artiste"
+        app:layout_constraintTop_toTopOf="@+id/tv_nom_chanson" />
+
+    <TextView
+        android:id="@+id/tv_artiste"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="160dp"
+        android:text="Artiste :"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_nom_chanson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Nom :"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="@id/tv_artiste"
+        app:layout_constraintTop_toBottomOf="@id/tv_artiste" />
+
+    <TextView
+        android:id="@+id/tv_genre_chanson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Genre :"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="@+id/tv_artiste"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nom_chanson" />
+
+    <Spinner
+        android:id="@+id/spinner_artiste"
+        android:layout_width="188dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_artiste"
+        app:layout_constraintStart_toEndOf="@+id/tv_artiste"
+        app:layout_constraintTop_toTopOf="@+id/tv_artiste" />
+
+    <Spinner
+        android:id="@+id/spinner_genre"
+        android:layout_width="189dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_genre_chanson"
+        app:layout_constraintStart_toStartOf="@+id/et_nom_chanson"
+        app:layout_constraintTop_toTopOf="@+id/tv_genre_chanson" />
+
+    <Button
+        android:id="@+id/btn_ajouter"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="160dp"
+        android:text="Ajouter"
+        app:layout_constraintBottom_toTopOf="@+id/btnAccueil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
