@@ -64,7 +64,7 @@ class PageFormulaire : AppCompatActivity() {
         }
 
         //Page Librarie
-        val btnEnvoyer3 = findViewById<Button>(R.id.btnLibrarie)
+        val btnEnvoyer3 = findViewById<Button>(R.id.btnLibrairie)
         btnEnvoyer3.setOnClickListener {
             Log.d(TAG, "btnEnvoyer onClick revenir page librarie")
             val intent = Intent(this, PageLibrarie::class.java)

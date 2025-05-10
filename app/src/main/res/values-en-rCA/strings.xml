@@ -7,4 +7,11 @@
     <string name="bienvenue">Welcome !</string>
     <string name="voir_votre_librarie">View your library</string>
     <string name="ajouter_une_chanson">Add a song</string>
+    <string name="profile_btn">Profile</string>
+    <string name="accueil_btn">Home</string>
+    <string name="librairie_btn">Library</string>
+    <string name="saisir_nom_chanson_hint">Enter the name of the song</string>
+    <string name="artiste_label">Artist :</string>
+    <string name="nom_chanson_label">Name :</string>
+    <string name="ajouter_btn">Add</string>
 </resources>
