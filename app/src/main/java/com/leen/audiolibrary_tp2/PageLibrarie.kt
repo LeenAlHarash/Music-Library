@@ -9,7 +9,12 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
+import com.leen.audiolibrary_tp2.data.Chanson
+import com.leen.audiolibrary_tp2.ui.chansons.ChansonAdapter
+import com.leen.audiolibrary_tp2.viewmodel.ChansonViewModel
 
 class PageLibrarie : AppCompatActivity() {
     //pour le dropdown menu : https://www.youtube.com/watch?v=jXSNobmB7u4&ab_channel=FineGap
@@ -53,7 +58,6 @@ class PageLibrarie : AppCompatActivity() {
         autoCompleteTextView = findViewById(R.id.autoCompleteTextView)
         adapterItems = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, filtre)
         autoCompleteTextView.setAdapter(adapterItems)
-
 
 
         //les fonctionnalités des boutons
