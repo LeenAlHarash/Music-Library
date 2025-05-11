@@ -155,5 +155,11 @@ class PageFormulaire : AppCompatActivity() {
         chansonViewModel.messageErreur.observe(this) {
             Toast.makeText(this, getString(R.string.message_exception), Toast.LENGTH_SHORT).show()
         }
+
+        // Toast qui affiche le message de succès de l'ajout d'une chanson
+        chansonViewModel.messageSuccess.observe(this){
+            Toast.makeText(this, getString(R.string.message_success), Toast.LENGTH_SHORT).show()
+
+        }
     }
 }

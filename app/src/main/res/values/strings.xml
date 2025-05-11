@@ -16,6 +16,7 @@
     <string name="genre_chanson_label" translatable="false">Genre :</string>
     <string name="ajouter_btn">Ajouter</string>
     <string name="message_exception">Erreur! Vous ne pouvez pas insérer une chanson ayant le même nom qu\'un autre</string>
+    <string name="message_success">La chanson a été ajouté avec succès!</string>
     <string name="aucun_genre_selectionne">Aucun genre sélectionné</string>
     <string name="aucun_artiste_selectionne">Aucun artiste sélectionné</string>
 </resources>

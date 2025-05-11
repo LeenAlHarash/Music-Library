@@ -27,11 +27,18 @@ class ChansonViewModel(application: Application) : AndroidViewModel(application)
     private val _messageErreur : MutableLiveData<String> = MutableLiveData<String>()
     val messageErreur = _messageErreur
 
+    // Message toast pour indiquer à l'utilisateur que l'ajout a été fait avec succès
+    private val _messageSuccess: MutableLiveData<String> = MutableLiveData<String>()
+    val messageSuccess = _messageSuccess
+
     // Méthode d'ajout d'une chanson
     fun ajouterChanson(nom: String, artiste : Artiste, genre : Genre) = viewModelScope.launch {
         try{
             chansonDAO.insert(Chanson(nom = nom, artisteId = artiste.id, genreId = genre.id))
+            // Message de succès en toast
+            _messageSuccess.value = PageFormulaire.instance.getString(R.string.message_success)
         } catch (e: SQLiteConstraintException) {
+            // Message d'erreur en toast
             _messageErreur.value = PageFormulaire.instance.getString(R.string.message_exception)
         }
     }
