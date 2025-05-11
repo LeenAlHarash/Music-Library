@@ -21,6 +21,6 @@
 ## Description de chaque fonctionnalité et son responsable 
 | Personne responsable | Description détaillée de la fonctionnalité |
 | ------------- | ------------- |
-| Leen | - Création de la page Profile<br/> - Création de la page accueil<br /> - Internalisation de ces deux pages<br/> - Création de la page librarie<br /> - Création de la page formulaire<br/> - Liaison entre toutes les pages<br/> - Afficher la liste des chansons (recyclerView)<br /> - Tests Unitaires (supprimer)|
-| Mariyam | - Création du formulaire pour l'ajout d'une chanson <br/> - Modification d'une chanson<br /> - Internalisation du formulaire<br /> - Tests Unitaires (Modifier et ajouter un chanson)<br /> - Création des tables SQL<br/> - Création de diagramme Mermaid|
-| Jaskaran | - Fonction Recherche par nom de la chanson<br />  - Tests Unitaires (pour rechercher)<br /> - Filtre par genre et par artist<br /> - Supprimer une chanson<br /> - Internalisation des chansons (librarie)<br /> - Thème sombre et clair|
+| Leen | - Création de la page Profile<br/> - Création de la page accueil<br /> - Internalisation de ces deux pages<br/> - Création de la page librarie<br /> - Création de la page formulaire<br/> - Liaison entre toutes les pages<br/> - Supprimer une chanson<br /> - Tests Unitaires (supprimer)|
+| Mariyam |  - Internalisation du formulaire<br /> - Ajouter une chanson <br/> - Modification d'une chanson<br /> - Tests Unitaires (Modifier et ajouter un chanson)<br /> - Création des tables SQL<br/> - Création de diagramme Mermaid|
+| Jaskaran | - Afficher la liste des chansons (recyclerView)<br /> - Internalisation des chansons (librarie)<br /> - Fonction Recherche par nom de la chanson<br />  - Tests Unitaires (pour rechercher)<br /> - Filtre par genre et par artist<br /> - Thème sombre et clair|
