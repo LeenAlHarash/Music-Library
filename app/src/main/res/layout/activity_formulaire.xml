@@ -98,17 +98,19 @@
 
     <Spinner
         android:id="@+id/spinner_artiste"
-        android:layout_width="188dp"
+        android:layout_width="251dp"
         android:layout_height="48dp"
         android:layout_marginStart="32dp"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="@+id/tv_artiste"
         app:layout_constraintStart_toEndOf="@+id/tv_artiste"
         app:layout_constraintTop_toTopOf="@+id/tv_artiste" />
 
     <Spinner
         android:id="@+id/spinner_genre"
-        android:layout_width="189dp"
+        android:layout_width="244dp"
         android:layout_height="48dp"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="@+id/tv_genre_chanson"
         app:layout_constraintStart_toStartOf="@+id/et_nom_chanson"
         app:layout_constraintTop_toTopOf="@+id/tv_genre_chanson" />
