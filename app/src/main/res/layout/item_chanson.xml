@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@android:color/white">
+
+    <!-- Titre de la chanson -->
+    <TextView
+        android:id="@+id/textViewTitre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Titre de la chanson"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#000000" />
+
+    <!-- Nom de l'artiste -->
+    <TextView
+        android:id="@+id/textViewArtiste"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Artiste"
+        android:textSize="14sp"
+        android:textColor="#555555"
+        android:layout_marginTop="8dp" />
+
+    <!-- Nom du genre -->
+    <TextView
+        android:id="@+id/textViewGenre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Genre"
+        android:textSize="13sp"
+        android:textColor="#777777"
+        android:layout_marginTop="4dp" />
+</LinearLayout>

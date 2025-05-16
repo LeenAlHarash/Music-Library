@@ -11,10 +11,15 @@ import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.leen.audiolibrary_tp2.data.Chanson
+import com.leen.audiolibrary_tp2.data.Artiste
+import com.leen.audiolibrary_tp2.data.ChansonAvecArtisteGenre
+import com.leen.audiolibrary_tp2.data.Genre
 import com.leen.audiolibrary_tp2.ui.chansons.ChansonAdapter
+import com.leen.audiolibrary_tp2.viewmodel.ArtisteViewModel
 import com.leen.audiolibrary_tp2.viewmodel.ChansonViewModel
+import com.leen.audiolibrary_tp2.viewmodel.GenreViewModel
 
 class PageLibrarie : AppCompatActivity() {
     //pour le dropdown menu : https://www.youtube.com/watch?v=jXSNobmB7u4&ab_channel=FineGap
@@ -50,6 +55,27 @@ class PageLibrarie : AppCompatActivity() {
         }
     }
 
+    // Ajout des ViewModels pour observer les données depuis la BD
+    private val chansonViewModel: ChansonViewModel by viewModels()
+    private val artisteViewModel: ArtisteViewModel by viewModels()
+    private val genreViewModel: GenreViewModel by viewModels()
+
+    // ecyclerView pour afficher la liste des chansons
+    private lateinit var recyclerView: RecyclerView
+
+    // Variables temporaires pour stocker les données avant de les passer à l'adapter
+    private var chansons: List<ChansonAvecArtisteGenre>? = null
+    private var artistes: List<Artiste>? = null
+    private var genres: List<Genre>? = null
+
+    // Fonction qui met à jour le RecyclerView seulement si les 3 listes sont prêtes
+    private fun mettreAJourRecyclerView() {
+        if (chansons != null && artistes != null && genres != null) {
+            val adapter = ChansonAdapter(chansons!!, chansonViewModel, artistes!!, genres!!)
+            recyclerView.adapter = adapter
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_librarie)
@@ -58,7 +84,6 @@ class PageLibrarie : AppCompatActivity() {
         autoCompleteTextView = findViewById(R.id.autoCompleteTextView)
         adapterItems = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, filtre)
         autoCompleteTextView.setAdapter(adapterItems)
-
 
         //les fonctionnalités des boutons
         //Page Profile
@@ -87,6 +112,28 @@ class PageLibrarie : AppCompatActivity() {
             Log.d(TAG, "btnEnvoyer onClick revenir page formulaire")
             val intent = Intent(this, PageFormulaire::class.java)
             pageFormulaireLauncher.launch(intent)
+        }
+
+        // Initialiser le RecyclerView
+        recyclerView = findViewById(R.id.recyclerViewListe)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        // Observer les chansons
+        chansonViewModel.chansons.observe(this) {
+            chansons = it
+            mettreAJourRecyclerView()
+        }
+
+        // Observer les artistes
+        artisteViewModel.artistes.observe(this) {
+            artistes = it
+            mettreAJourRecyclerView()
+        }
+
+        // Observer les genres
+        genreViewModel.genres.observe(this) {
+            genres = it
+            mettreAJourRecyclerView()
         }
     }
 }

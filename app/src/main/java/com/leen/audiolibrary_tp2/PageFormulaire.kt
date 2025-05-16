@@ -74,7 +74,8 @@ class PageFormulaire : AppCompatActivity() {
         val spinnerGenre = findViewById<Spinner>(R.id.spinner_genre)
         val btnAjouter = findViewById<Button>(R.id.btn_ajouter)
         val etNouvelleChanson : EditText = findViewById(R.id.et_nom_chanson)
-        val adapter = ChansonAdapter(emptyList(), chansonViewModel)
+        /* val adapter = ChansonAdapter(emptyList(), chansonViewModel) */ // Pas besoins et ceci provoque un erreur
+
 
         //les fonctionnalités des boutons
         //Page Profile
