@@ -12,7 +12,7 @@ import androidx.room.Update
 interface ChansonDAO {
 
     @Insert
-    suspend fun insert(chanson : Chanson)
+    suspend fun insert(chanson: Chanson)
 
     @Update
     suspend fun update(chanson: Chanson)
@@ -23,4 +23,8 @@ interface ChansonDAO {
     @Transaction // Execution de plusieurs requetes
     @Query("SELECT * FROM Chanson")
     fun getAll(): LiveData<List<ChansonAvecArtisteGenre>>
+
+    // pour les tests
+    @Query("SELECT * FROM Chanson")
+    suspend fun getAllForTests(): List<ChansonAvecArtisteGenre>
 }
