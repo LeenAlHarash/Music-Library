@@ -21,5 +21,4 @@ interface GenreDAO {
     @Query("SELECT * FROM Genre")
     // live data variable so no need to put suspend
     fun getAll(): LiveData<List<Genre>>
-
 }

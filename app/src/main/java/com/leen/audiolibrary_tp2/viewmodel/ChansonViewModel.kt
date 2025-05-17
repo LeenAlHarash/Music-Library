@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.leen.audiolibrary_tp2.PageFormulaire
+import com.leen.audiolibrary_tp2.ui.main.PageFormulaire
 import com.leen.audiolibrary_tp2.R
 import com.leen.audiolibrary_tp2.data.AppDatabase
 import com.leen.audiolibrary_tp2.data.Artiste
@@ -59,5 +59,10 @@ class ChansonViewModel(application: Application) : AndroidViewModel(application)
                 chansonDAO.update(chanson.copy(artisteId = nouveauGenre.id))
             }
         }
+    }
+
+    // Methode pour supprimer un chanson
+    fun supprimerArticle(chanson: Chanson) = viewModelScope.launch {
+        chansonDAO.delete(chanson)
     }
 }

@@ -1,7 +1,6 @@
-package com.leen.audiolibrary_tp2
+package com.leen.audiolibrary_tp2.ui.main
 
-import android.content.ContentValues.TAG
-import android.content.Context
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -12,6 +11,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.leen.audiolibrary_tp2.R
 
 private const val PREFS_KEY_NOM = "nom"
 
@@ -23,18 +23,18 @@ class MainActivity : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK){
             val retour = result.data?.getStringExtra("resultat")
-            Log.d(TAG, "Résultat: $retour")
+            Log.d(ContentValues.TAG, "Résultat: $retour")
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate")
+        Log.d(ContentValues.TAG, "onCreate")
         setContentView(R.layout.activity_main)
 
         //Pour sauvegarder le nom insérer au lancement de l'application
         val inputNom = findViewById<EditText>(R.id.nameSpace)
-        val prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE)
+        val prefs = getSharedPreferences("prefs", MODE_PRIVATE)
         val nom = prefs.getString(PREFS_KEY_NOM, "")
 
         inputNom.setText(nom)
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             if (nom.isEmpty()) {
                 Toast.makeText(this, getString(R.string.toastProfile), Toast.LENGTH_SHORT).show()
             } else {
-                Log.d(TAG, "btnEnvoyer onClick : $nom")
+                Log.d(ContentValues.TAG, "btnEnvoyer onClick : $nom")
                 val intent = Intent(this, PageAccueil::class.java)
                 intent.putExtra("nom", nom)
                 pageAccueilLauncher.launch(intent)
@@ -71,9 +71,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Les fonctiones logs
-    override fun onStart() { super.onStart(); Log.d(TAG, "onStart") }
-    override fun onResume() { super.onResume(); Log.d(TAG, "onResume") }
-    override fun onPause() { super.onPause(); Log.d(TAG, "onPause") }
-    override fun onStop() { super.onStop(); Log.d(TAG, "onStop") }
-    override fun onDestroy() { super.onDestroy(); Log.d(TAG, "onDestroy") }
+    override fun onStart() { super.onStart(); Log.d(ContentValues.TAG, "onStart")
+    }
+    override fun onResume() { super.onResume(); Log.d(ContentValues.TAG, "onResume")
+    }
+    override fun onPause() { super.onPause(); Log.d(ContentValues.TAG, "onPause")
+    }
+    override fun onStop() { super.onStop(); Log.d(ContentValues.TAG, "onStop")
+    }
+    override fun onDestroy() { super.onDestroy(); Log.d(ContentValues.TAG, "onDestroy")
+    }
 }

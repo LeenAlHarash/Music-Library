@@ -3,9 +3,7 @@ package com.leen.audiolibrary_tp2.ui.chansons
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
+import android.widget.Button
 import android.widget.TextView // Ajout pour affichage lecture seule
 import androidx.recyclerview.widget.RecyclerView
 import com.leen.audiolibrary_tp2.R
@@ -34,6 +32,7 @@ class ChansonAdapter(
         val textViewTitre: TextView = itemView.findViewById(R.id.textViewTitre)
         val textViewArtiste: TextView = itemView.findViewById(R.id.textViewArtiste)
         val textViewGenre: TextView = itemView.findViewById(R.id.textViewGenre)
+        val btnSupprimer: Button = itemView.findViewById(R.id.btnSupprimer)
     }
 
     // Prépare la vue de l'activité librairie lorsque les chansons apparaissent
@@ -54,10 +53,17 @@ class ChansonAdapter(
         val artiste = listeChansons[position].artiste
         val genre = listeChansons[position].genre
 
+
         // Remplir les champs TextView avec les données de la chanson
         holder.textViewTitre.text = chanson.nom
         holder.textViewArtiste.text = artiste.nom
         holder.textViewGenre.text = genre.nom
+
+        // quand on click sur l'X dans la librarie on supprime la chanson
+        holder.btnSupprimer.setOnClickListener {
+            chansonViewModel.supprimerArticle(chanson)
+        }
+
 
         // Si tu veux réactiver les Spinner plus tard, décommente ce bloc :
         /*

@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.leen.audiolibrary_tp2.data.AppDatabase
 import com.leen.audiolibrary_tp2.data.Artiste
-import com.leen.audiolibrary_tp2.data.Genre
 import kotlinx.coroutines.launch
 
 class ArtisteViewModel(application: Application) : AndroidViewModel(application) {
@@ -37,5 +36,4 @@ class ArtisteViewModel(application: Application) : AndroidViewModel(application)
             )
         }
     }
-
 }

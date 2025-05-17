@@ -1,7 +1,6 @@
-package com.leen.audiolibrary_tp2
+package com.leen.audiolibrary_tp2.ui.main
 
-import android.content.ContentValues.TAG
-import android.content.Context
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,10 +12,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
+import com.leen.audiolibrary_tp2.R
 import com.leen.audiolibrary_tp2.data.Artiste
 import com.leen.audiolibrary_tp2.data.Genre
-import com.leen.audiolibrary_tp2.ui.chansons.ChansonAdapter
 import com.leen.audiolibrary_tp2.viewmodel.ArtisteViewModel
 import com.leen.audiolibrary_tp2.viewmodel.ChansonViewModel
 import com.leen.audiolibrary_tp2.viewmodel.GenreViewModel
@@ -41,7 +39,7 @@ class PageFormulaire : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK){
             val retour = result.data?.getStringExtra("resultat")
-            Log.d(TAG, "Résultat: $retour")
+            Log.d(ContentValues.TAG, "Résultat: $retour")
         }
     }
 
@@ -50,7 +48,7 @@ class PageFormulaire : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK){
             val retour = result.data?.getStringExtra("resultat")
-            Log.d(TAG, "Résultat: $retour")
+            Log.d(ContentValues.TAG, "Résultat: $retour")
         }
     }
 
@@ -59,7 +57,7 @@ class PageFormulaire : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK){
             val retour = result.data?.getStringExtra("resultat")
-            Log.d(TAG, "Résultat: $retour")
+            Log.d(ContentValues.TAG, "Résultat: $retour")
         }
     }
 
@@ -81,7 +79,7 @@ class PageFormulaire : AppCompatActivity() {
         //Page Profile
         val btnEnvoyer1 = findViewById<Button>(R.id.btnProfile)
         btnEnvoyer1.setOnClickListener {
-            Log.d(TAG, "btnEnvoyer onClick revenir page profile")
+            Log.d(ContentValues.TAG, "btnEnvoyer onClick revenir page profile")
             val intent = Intent(this, MainActivity::class.java)
             mainActivityLauncher.launch(intent)
         }
@@ -90,9 +88,9 @@ class PageFormulaire : AppCompatActivity() {
         val btnEnvoyer2 = findViewById<Button>(R.id.btnAccueil)
         btnEnvoyer2.setOnClickListener {
             //récupérer le nom sauvegardé
-            val prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE)
+            val prefs = getSharedPreferences("prefs", MODE_PRIVATE)
             val nom = prefs.getString("nom", "") ?: ""
-            Log.d(TAG, "btnEnvoyer2 onClick : nom = $nom")
+            Log.d(ContentValues.TAG, "btnEnvoyer2 onClick : nom = $nom")
             val intent = Intent(this, PageAccueil::class.java)
             intent.putExtra("nom", nom)
             pageAccueilLauncher.launch(intent)
@@ -101,7 +99,7 @@ class PageFormulaire : AppCompatActivity() {
         //Page Librarie
         val btnEnvoyer3 = findViewById<Button>(R.id.btnLibrairie)
         btnEnvoyer3.setOnClickListener {
-            Log.d(TAG, "btnEnvoyer onClick revenir page librarie")
+            Log.d(ContentValues.TAG, "btnEnvoyer onClick revenir page librarie")
             val intent = Intent(this, PageLibrarie::class.java)
             pageLibrarieLauncher.launch(intent)
         }
@@ -132,7 +130,8 @@ class PageFormulaire : AppCompatActivity() {
             )
             genresAvecOptionVide.addAll(genres)
 
-            val genreAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, genresAvecOptionVide)
+            val genreAdapter =
+                ArrayAdapter(this, android.R.layout.simple_spinner_item, genresAvecOptionVide)
 
             // Attribuer l'adapter des genres au spinner pour voir les informations dedans
             spinnerGenre.adapter = genreAdapter
@@ -146,7 +145,8 @@ class PageFormulaire : AppCompatActivity() {
             )
             artistesAvecOptionVide.addAll(artistes)
 
-            val artisteAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, artistesAvecOptionVide)
+            val artisteAdapter =
+                ArrayAdapter(this, android.R.layout.simple_spinner_item, artistesAvecOptionVide)
 
             // Attribuer l'adapter des artistes au spinner pour voir les informations dedans
             spinnerArtiste.adapter = artisteAdapter

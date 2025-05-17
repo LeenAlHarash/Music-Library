@@ -1,7 +1,6 @@
-package com.leen.audiolibrary_tp2
+package com.leen.audiolibrary_tp2.ui.main
 
-import android.content.ContentValues.TAG
-import android.content.Context
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.leen.audiolibrary_tp2.R
 import com.leen.audiolibrary_tp2.data.Artiste
 import com.leen.audiolibrary_tp2.data.ChansonAvecArtisteGenre
 import com.leen.audiolibrary_tp2.data.Genre
@@ -22,7 +22,8 @@ import com.leen.audiolibrary_tp2.viewmodel.ChansonViewModel
 import com.leen.audiolibrary_tp2.viewmodel.GenreViewModel
 
 class PageLibrarie : AppCompatActivity() {
-    //pour le dropdown menu : https://www.youtube.com/watch?v=jXSNobmB7u4&ab_channel=FineGap
+    // JASKARAN: pour le dropdown menu : https://www.youtube.com/watch?v=jXSNobmB7u4&ab_channel=FineGap
+    // ^^ ou voir example brocoli, plus facile
     private val filtre = arrayOf("remplir", "ici", "pour", "filtrer")
     private lateinit var autoCompleteTextView: AutoCompleteTextView
     private lateinit var adapterItems: ArrayAdapter<String>
@@ -33,7 +34,7 @@ class PageLibrarie : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK){
             val retour = result.data?.getStringExtra("resultat")
-            Log.d(TAG, "Résultat: $retour")
+            Log.d(ContentValues.TAG, "Résultat: $retour")
         }
     }
 
@@ -42,7 +43,7 @@ class PageLibrarie : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK){
             val retour = result.data?.getStringExtra("resultat")
-            Log.d(TAG, "Résultat: $retour")
+            Log.d(ContentValues.TAG, "Résultat: $retour")
         }
     }
 
@@ -51,7 +52,7 @@ class PageLibrarie : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK){
             val retour = result.data?.getStringExtra("resultat")
-            Log.d(TAG, "Résultat: $retour")
+            Log.d(ContentValues.TAG, "Résultat: $retour")
         }
     }
 
@@ -89,7 +90,7 @@ class PageLibrarie : AppCompatActivity() {
         //Page Profile
         val btnEnvoyer1 = findViewById<Button>(R.id.btnProfile)
         btnEnvoyer1.setOnClickListener {
-            Log.d(TAG, "btnEnvoyer onClick revenir page profile")
+            Log.d(ContentValues.TAG, "btnEnvoyer onClick revenir page profile")
             val intent = Intent(this, MainActivity::class.java)
             mainActivityLauncher.launch(intent)
         }
@@ -98,9 +99,9 @@ class PageLibrarie : AppCompatActivity() {
         val btnEnvoyer2 = findViewById<Button>(R.id.btnAccueil)
         btnEnvoyer2.setOnClickListener {
             //récupérer le nom sauvegardé
-            val prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE)
+            val prefs = getSharedPreferences("prefs", MODE_PRIVATE)
             val nom = prefs.getString("nom", "") ?: ""
-            Log.d(TAG, "btnEnvoyer2 onClick : nom = $nom")
+            Log.d(ContentValues.TAG, "btnEnvoyer2 onClick : nom = $nom")
             val intent = Intent(this, PageAccueil::class.java)
             intent.putExtra("nom", nom)
             pageAccueilLauncher.launch(intent)
@@ -109,7 +110,7 @@ class PageLibrarie : AppCompatActivity() {
         //Page Formulaire
         val btnEnvoyer3 = findViewById<Button>(R.id.btnFormulaire)
         btnEnvoyer3.setOnClickListener {
-            Log.d(TAG, "btnEnvoyer onClick revenir page formulaire")
+            Log.d(ContentValues.TAG, "btnEnvoyer onClick revenir page formulaire")
             val intent = Intent(this, PageFormulaire::class.java)
             pageFormulaireLauncher.launch(intent)
         }

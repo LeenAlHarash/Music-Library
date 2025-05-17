@@ -1,6 +1,6 @@
-package com.leen.audiolibrary_tp2
+package com.leen.audiolibrary_tp2.ui.main
 
-import android.content.ContentValues.TAG
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.leen.audiolibrary_tp2.R
 
 class PageAccueil : AppCompatActivity() {
 
@@ -17,7 +18,7 @@ class PageAccueil : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK){
             val retour = result.data?.getStringExtra("resultat")
-            Log.d(TAG, "Résultat: $retour")
+            Log.d(ContentValues.TAG, "Résultat: $retour")
         }
     }
     private val pageLibrarieLauncher = registerForActivityResult(
@@ -25,7 +26,7 @@ class PageAccueil : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK){
             val retour = result.data?.getStringExtra("resultat")
-            Log.d(TAG, "Résultat: $retour")
+            Log.d(ContentValues.TAG, "Résultat: $retour")
         }
     }
 
@@ -35,7 +36,7 @@ class PageAccueil : AppCompatActivity() {
         setContentView(R.layout.activity_accueil) //on appele le layout activity_accueil.xml
 
         val nom = intent.getStringExtra("nom")
-        Log.d(TAG, "onCreate : $nom")
+        Log.d(ContentValues.TAG, "onCreate : $nom")
         val tvMessage = findViewById<TextView>(R.id.tvWelcome)
         tvMessage.text = getString(R.string.bonjour, nom) //appeler le nom de l'utilisateur
 
@@ -44,7 +45,7 @@ class PageAccueil : AppCompatActivity() {
         val btnEnvoyer = findViewById<Button>(R.id.btnAjouterChanson)
         //listener pour le bouton
         btnEnvoyer.setOnClickListener {
-            Log.d(TAG, "btnEnvoyer onClick Ajouter Chanson")
+            Log.d(ContentValues.TAG, "btnEnvoyer onClick Ajouter Chanson")
             val intent = Intent(this, PageFormulaire::class.java)
             pageFormulaireLauncher.launch(intent)
         }
@@ -52,7 +53,7 @@ class PageAccueil : AppCompatActivity() {
         //Page Librarie
         val btnEnvoyer3 = findViewById<Button>(R.id.btnViewLibrary)
         btnEnvoyer3.setOnClickListener {
-            Log.d(TAG, "btnEnvoyer onClick page librarie")
+            Log.d(ContentValues.TAG, "btnEnvoyer onClick page librarie")
             val intent = Intent(this, PageLibrarie::class.java)
             pageLibrarieLauncher.launch(intent)
         }
@@ -60,9 +61,9 @@ class PageAccueil : AppCompatActivity() {
 
 
     //Les fonctiones logs
-    override fun onStart() { super.onStart(); Log.d(TAG, "onStart") }
-    override fun onResume() { super.onResume(); Log.d(TAG, "onResume") }
-    override fun onPause() { super.onPause(); Log.d(TAG, "onPause") }
-    override fun onStop() { super.onStop(); Log.d(TAG, "onStop") }
-    override fun onDestroy() { super.onDestroy(); Log.d(TAG, "onDestroy") }
+    override fun onStart() { super.onStart(); Log.d(ContentValues.TAG, "onStart") }
+    override fun onResume() { super.onResume(); Log.d(ContentValues.TAG, "onResume") }
+    override fun onPause() { super.onPause(); Log.d(ContentValues.TAG, "onPause") }
+    override fun onStop() { super.onStop(); Log.d(ContentValues.TAG, "onStop") }
+    override fun onDestroy() { super.onDestroy(); Log.d(ContentValues.TAG, "onDestroy") }
 }
