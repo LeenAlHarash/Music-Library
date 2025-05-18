@@ -1,5 +1,6 @@
 package com.leen.audiolibrary_tp2.ui.chansons
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import com.leen.audiolibrary_tp2.R
 import com.leen.audiolibrary_tp2.data.Artiste
 import com.leen.audiolibrary_tp2.data.ChansonAvecArtisteGenre
 import com.leen.audiolibrary_tp2.data.Genre
+import com.leen.audiolibrary_tp2.ui.main.PageModification
 import com.leen.audiolibrary_tp2.viewmodel.ChansonViewModel
 
 // Ajout des artistes et genres passés dynamiquement au constructeur
@@ -33,6 +35,7 @@ class ChansonAdapter(
         val textViewArtiste: TextView = itemView.findViewById(R.id.textViewArtiste)
         val textViewGenre: TextView = itemView.findViewById(R.id.textViewGenre)
         val btnSupprimer: Button = itemView.findViewById(R.id.btnSupprimer)
+        val btnModifier: Button = itemView.findViewById(R.id.btnModifier)
     }
 
     // Prépare la vue de l'activité librairie lorsque les chansons apparaissent
@@ -62,6 +65,12 @@ class ChansonAdapter(
         // quand on click sur l'X dans la librarie on supprime la chanson
         holder.btnSupprimer.setOnClickListener {
             chansonViewModel.supprimerArticle(chanson)
+        }
+        // quand on click sur le bouton modifier on modifie la chanson
+        holder.btnModifier.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, PageModification::class.java)
+            context.startActivity(intent)
         }
 
 
