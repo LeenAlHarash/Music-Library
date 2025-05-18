@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 // Version 4 pour être capable de faire des changements à la base de données
-@Database(entities = [Chanson::class, Artiste::class, Genre::class], version = 4)
+@Database(entities = [Chanson::class, Artiste::class, Genre::class], version = 5)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun chansonDAO(): ChansonDAO

@@ -18,4 +18,6 @@
     <string name="message_success">The song has been added successfully!</string>
     <string name="aucun_genre_selectionne">No genre selected</string>
     <string name="aucun_artiste_selectionne">No artist selected</string>
+    <string name="message_erreur_artiste">Warning! Please add an artist to your song</string>
+    <string name="message_erreur_genre">Warning! Please add a genre to your song</string>
 </resources>
