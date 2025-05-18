@@ -21,4 +21,6 @@
     <string name="aucun_artiste_selectionne">Aucun artiste sélectionné</string>
     <string name="message_erreur_artiste">Attention! Veuillez ajouter un artiste à votre chanson</string>
     <string name="message_erreur_genre">Attention! Veuillez ajouter un genre à votre chanson</string>
+    <string name="modifier">Modifier</string>
+    <string name="modification_d_une_chanson">Modification d\'une chanson</string>
 </resources>

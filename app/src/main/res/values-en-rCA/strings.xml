@@ -20,4 +20,6 @@
     <string name="aucun_artiste_selectionne">No artist selected</string>
     <string name="message_erreur_artiste">Warning! Please add an artist to your song</string>
     <string name="message_erreur_genre">Warning! Please add a genre to your song</string>
+    <string name="modifier">"Modify "</string>
+    <string name="modification_d_une_chanson">Modifying a song</string>
 </resources>
