@@ -83,12 +83,67 @@ class ExampleInstrumentedTest {
 
 
     // Test pour ajouter une chanson
+    @Test
+    fun testAjouterChanson() = runBlocking {
+
+        // Insérer de deux artistes et deux genres
+        val artiste1 = Artiste(id = 1, nom = "Artist 1")
+        val artiste2 = Artiste(id = 2, nom = "Artist 2")
+        daoArtiste.insertAll(artiste1)
+        daoArtiste.insertAll(artiste2)
+
+        val genre1 = Genre(id = 1, nom = "Genre 1")
+        val genre2 = Genre(id = 2, nom = "Genre 2")
+        daoGenre.insertAll(genre1)
+        daoGenre.insertAll(genre2)
 
 
+        // Insertion de deux chansons
+        val chanson1 = Chanson(id = 1, nom = "Song A", artisteId = 1, genreId = 1)
+        val chanson2 = Chanson(id = 2, nom = "Song B", artisteId = 2, genreId = 2)
+        daoChanson.insert(chanson1)
+        daoChanson.insert(chanson2)
 
+        // Confirmer que les deux chansons ont été insérés
+        var chansons = daoChanson.getAllForTests()
+        Assert.assertEquals(2, chansons.size)
 
+        // Recharger la base de données
+        chansons = daoChanson.getAllForTests()
+    }
 
     // Test pour modifier une chanson
+    @Test
+    fun testModifierChanson() = runBlocking {
 
+        // Insérer un artiste
+        val artiste1 = Artiste(id = 1, nom = "Artist 1")
+        daoArtiste.insertAll(artiste1)
+
+        // Insérer un genre
+        val genre1 = Genre(id = 1, nom = "Genre 1")
+        daoGenre.insertAll(genre1)
+
+        // Insertion d'une chanson
+        val chanson1 = Chanson(id = 1, nom = "Song A", artisteId = 1, genreId = 1)
+        daoChanson.insert(chanson1)
+
+        // Confirmer que la chanson ont été inséré
+        var chansons = daoChanson.getAllForTests()
+        Assert.assertEquals(1, chansons.size)
+
+        // Chercher la chanson par son id
+        daoChanson.getChansonById(chanson1.id)
+
+        // Modifier la chanson
+        val chansonModifier = chanson1.copy(id = 1, nom = "Song B", artisteId = 1, genreId = 1)
+        daoChanson.update(chansonModifier)
+
+        // Recharger la base de données
+        chansons = daoChanson.getAllForTests()
+
+        // Vérifier que la modification a été véritablement faite
+        Assert.assertEquals(chansonModifier.nom, "Song B")
+    }
 
 }
