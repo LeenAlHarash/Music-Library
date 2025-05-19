@@ -20,6 +20,10 @@ interface ChansonDAO {
     @Delete
     suspend fun delete(chanson: Chanson)
 
+    // Chercher une chanson basé sur son id pour la modification
+    @Query("SELECT * FROM Chanson WHERE id= :id")
+    suspend fun getChansonById(id : Int) : Chanson?
+
     @Transaction // Execution de plusieurs requetes
     @Query("SELECT * FROM Chanson")
     fun getAll(): LiveData<List<ChansonAvecArtisteGenre>>

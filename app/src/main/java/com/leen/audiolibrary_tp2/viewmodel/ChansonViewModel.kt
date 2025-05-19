@@ -14,6 +14,7 @@ import com.leen.audiolibrary_tp2.data.Artiste
 import com.leen.audiolibrary_tp2.data.Chanson
 import com.leen.audiolibrary_tp2.data.ChansonAvecArtisteGenre
 import com.leen.audiolibrary_tp2.data.Genre
+import com.leen.audiolibrary_tp2.ui.main.PageModification
 import kotlinx.coroutines.launch
 
 class ChansonViewModel(application: Application) : AndroidViewModel(application) {
@@ -40,9 +41,13 @@ class ChansonViewModel(application: Application) : AndroidViewModel(application)
     private val _messageErreurGenre : MutableLiveData<String> = MutableLiveData<String>()
     val messageErreurGenre = _messageErreurGenre
 
-    // Message toast pour indiquer à l'utilisateur d'ajouter un nom à la chanson
-    private val _messageErreurNom : MutableLiveData<String> = MutableLiveData<String>()
-    val messageErreurNom = _messageErreurGenre
+    // Message toast pour indiquer à l'utilisateur que la modification a été un succès
+    private val _messageSuccessModification : MutableLiveData<String> = MutableLiveData<String>()
+    val messageSuccessModification = _messageSuccessModification
+
+    // Chanson sélectionné avec le id
+    // Variable pour qu'il puisse tenir les changements nécéssaire
+    private val _chansonSelectionner : MutableLiveData<Chanson> = MutableLiveData<Chanson>()
 
     // Méthode d'ajout d'une chanson
     fun ajouterChanson(nom: String, artiste : Artiste, genre : Genre) = viewModelScope.launch {
@@ -54,7 +59,7 @@ class ChansonViewModel(application: Application) : AndroidViewModel(application)
         // Vérifier si l'artiste est null et afficher un message d'erreur si oui
         if (artiste.id == -1) {
             _messageErreurArtiste.value = PageFormulaire.instance.getString(R.string.message_erreur_artiste)
-        // Vérifier si le genre est null et afficher un message d'erreur si oui
+            // Vérifier si le genre est null et afficher un message d'erreur si oui
         } else if (genre.id == -1) {
             _messageErreurGenre.value = PageFormulaire.instance.getString(R.string.message_erreur_genre)
         } else {
@@ -70,21 +75,25 @@ class ChansonViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    // Méthode qui attribue un artiste à la chanson
-    fun changerArtiste(chanson: Chanson, nouveauArtiste : Artiste){
-        viewModelScope.launch {
-            if(chanson.artisteId != nouveauArtiste.id){
-                chansonDAO.update(chanson.copy(artisteId = nouveauArtiste.id))
-            }
-        }
+    // Méthode qui sélectionne le id de la chanson
+    fun chercherChansonParId(id : Int) = viewModelScope.launch {
+        val chanson = chansonDAO.getChansonById(id)
+        // On attribue cette chanson à la variable Live
+        _chansonSelectionner.postValue(chanson)
     }
 
-    // Méthode qui attribue un genre à la chanson
-    fun changerGenre(chanson: Chanson, nouveauGenre : Genre){
-        viewModelScope.launch {
-            if(chanson.genreId != nouveauGenre.id){
-                chansonDAO.update(chanson.copy(genreId = nouveauGenre.id))
-            }
+    // Méthode pour la modification d'une chanson
+    fun modifierChanson(nouveauNom : String, nouveauArtiste : Artiste, nouveauGenre : Genre) = viewModelScope.launch {
+        // On crée une nouvelle variable chanson qui a la valeur de la chanson sélectionné avec l'id
+        val chanson = _chansonSelectionner.value
+        // On fait une copy d'un objet chanson à une nouvelle valeur
+        val chansonModifier = chanson?.copy(nom = nouveauNom, artisteId = nouveauArtiste.id, genreId = nouveauGenre.id)
+        // Si la chanson à modifier n'est pas null, on la modifie et on l'attribue à la valeur Live sélectionné
+        if(chansonModifier != null){
+            chansonDAO.update(chansonModifier)
+            _chansonSelectionner.value = chansonModifier
+            // Message de succès de la modification en toast
+            _messageSuccessModification.value = PageModification.instance.getString(R.string.message_success_modification)
         }
     }
 

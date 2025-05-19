@@ -55,7 +55,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_nom_chanson"
+        android:id="@+id/et_nom_chanson_modification"
         android:layout_width="240dp"
         android:layout_height="48dp"
         android:ems="10"
@@ -112,11 +112,11 @@
         android:layout_height="48dp"
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="@+id/tv_genre_chanson"
-        app:layout_constraintStart_toStartOf="@+id/et_nom_chanson"
+        app:layout_constraintStart_toStartOf="@+id/et_nom_chanson_modification"
         app:layout_constraintTop_toTopOf="@+id/tv_genre_chanson" />
 
     <Button
-        android:id="@+id/btn_ajouter"
+        android:id="@+id/btn_modifier"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
