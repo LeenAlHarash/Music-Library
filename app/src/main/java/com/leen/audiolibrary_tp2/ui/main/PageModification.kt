@@ -167,5 +167,10 @@ class PageModification : AppCompatActivity() {
         chansonViewModel.messageSuccessModification.observe(this) {
             Toast.makeText(this, getString(R.string.message_success_modification), Toast.LENGTH_SHORT).show()
         }
+
+        // Toast qui gère les chansons ayant le même nom
+        chansonViewModel.messageErreur.observe(this) {
+            Toast.makeText(this, getString(R.string.message_exception), Toast.LENGTH_SHORT).show()
+        }
     }
 }

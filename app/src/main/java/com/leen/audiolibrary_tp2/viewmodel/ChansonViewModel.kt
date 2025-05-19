@@ -84,16 +84,21 @@ class ChansonViewModel(application: Application) : AndroidViewModel(application)
 
     // Méthode pour la modification d'une chanson
     fun modifierChanson(nouveauNom : String, nouveauArtiste : Artiste, nouveauGenre : Genre) = viewModelScope.launch {
-        // On crée une nouvelle variable chanson qui a la valeur de la chanson sélectionné avec l'id
-        val chanson = _chansonSelectionner.value
-        // On fait une copy d'un objet chanson à une nouvelle valeur
-        val chansonModifier = chanson?.copy(nom = nouveauNom, artisteId = nouveauArtiste.id, genreId = nouveauGenre.id)
-        // Si la chanson à modifier n'est pas null, on la modifie et on l'attribue à la valeur Live sélectionné
-        if(chansonModifier != null){
-            chansonDAO.update(chansonModifier)
-            _chansonSelectionner.value = chansonModifier
-            // Message de succès de la modification en toast
-            _messageSuccessModification.value = PageModification.instance.getString(R.string.message_success_modification)
+        try {
+            // On crée une nouvelle variable chanson qui a la valeur de la chanson sélectionné avec l'id
+            val chanson = _chansonSelectionner.value
+            // On fait une copy d'un objet chanson à une nouvelle valeur
+            val chansonModifier = chanson?.copy(nom = nouveauNom, artisteId = nouveauArtiste.id, genreId = nouveauGenre.id)
+            // Si la chanson à modifier n'est pas null, on la modifie et on l'attribue à la valeur Live sélectionné
+            if(chansonModifier != null){
+                chansonDAO.update(chansonModifier)
+                _chansonSelectionner.value = chansonModifier
+                // Message de succès de la modification en toast
+                _messageSuccessModification.value = PageModification.instance.getString(R.string.message_success_modification)
+            }
+        } catch (e: SQLiteConstraintException) {
+            // Message d'erreur en toast (pour garder le nom de la chanson unique)
+            _messageErreur.value = PageModification.instance.getString(R.string.message_exception)
         }
     }
 
