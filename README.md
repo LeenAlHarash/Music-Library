@@ -29,8 +29,8 @@
 
 ````mermaid
 erDiagram
-    CHANSON o{--|| ARTISTE : a
-    CHANSON o{--|| GENRE : a
+    CHANSON o{--|| ARTISTE : produit
+    CHANSON o{--|| GENRE : appartient
     CHANSON {
         int id
         string nom
