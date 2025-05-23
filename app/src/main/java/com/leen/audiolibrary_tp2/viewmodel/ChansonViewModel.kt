@@ -25,7 +25,7 @@ class ChansonViewModel(application: Application) : AndroidViewModel(application)
     // Chercher tous les chansons à partir de la base de données
     val chansons: LiveData<List<ChansonAvecArtisteGenre>> = chansonDAO.getAll()
 
-    // LiveData pour les chansons filtrées (recherche par nom)
+    // LiveData pour les chansons filtrées (recherche par nom ou filtres combinés)
     private val _chansonsFiltrees: MutableLiveData<List<ChansonAvecArtisteGenre>> = MutableLiveData()
     val chansonsFiltrees: LiveData<List<ChansonAvecArtisteGenre>> = _chansonsFiltrees
 
@@ -38,6 +38,24 @@ class ChansonViewModel(application: Application) : AndroidViewModel(application)
         _chansonsFiltrees.value = resultatFiltre
 
         // Afficher un message d'erreur si aucun résultat trouvé
+        if (resultatFiltre.isEmpty()) {
+            _messageErreur.value = appContext.getString(R.string.message_aucune_chanson)
+        }
+    }
+
+    // Recherche combinée par nom, artiste et genre
+    fun rechercherParCriteres(nom: String?, artisteNom: String?, genreNom: String?) {
+        val listeOriginale = chansons.value ?: return
+
+        val resultatFiltre = listeOriginale.filter {
+            val matchNom = nom.isNullOrBlank() || it.chanson.nom.contains(nom, ignoreCase = true)
+            val matchArtiste = artisteNom.isNullOrBlank() || it.artiste.nom.equals(artisteNom, ignoreCase = true)
+            val matchGenre = genreNom.isNullOrBlank() || it.genre.nom.equals(genreNom, ignoreCase = true)
+            matchNom && matchArtiste && matchGenre
+        }
+
+        _chansonsFiltrees.value = resultatFiltre
+
         if (resultatFiltre.isEmpty()) {
             _messageErreur.value = appContext.getString(R.string.message_aucune_chanson)
         }

@@ -145,5 +145,4 @@ class ExampleInstrumentedTest {
         // Vérifier que la modification a été véritablement faite
         Assert.assertEquals(chansonModifier.nom, "Song B")
     }
-
 }

@@ -28,9 +28,6 @@ import com.leen.audiolibrary_tp2.viewmodel.GenreViewModel
 class PageLibrarie : AppCompatActivity() {
     // JASKARAN: pour le dropdown menu : https://www.youtube.com/watch?v=jXSNobmB7u4&ab_channel=FineGap
     // ^^ ou voir example brocoli, plus facile
-    private val filtre = arrayOf("remplir", "ici", "pour", "filtrer")
-    private lateinit var autoCompleteTextView: AutoCompleteTextView
-    private lateinit var adapterItems: ArrayAdapter<String>
 
     //pour appeler les pages
     private val mainActivityLauncher = registerForActivityResult(
@@ -76,10 +73,89 @@ class PageLibrarie : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_librarie)
 
-        //partie drop down
-        autoCompleteTextView = findViewById(R.id.autoCompleteTextView)
-        adapterItems = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, filtre)
-        autoCompleteTextView.setAdapter(adapterItems)
+        // Initialisation des nouveaux dropdowns artiste et genre
+        val dropdownArtiste = findViewById<AutoCompleteTextView>(R.id.dropdownArtiste)
+        val dropdownGenre = findViewById<AutoCompleteTextView>(R.id.dropdownGenre)
+
+        // Champ de recherche texte
+        val rechercheInput = findViewById<EditText>(R.id.rechercheInput)
+
+        // Initialiser le RecyclerView
+        recyclerView = findViewById(R.id.recyclerViewListe)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        // Fonction pour appliquer le filtrage combiné (appelée par les 3 champs)
+        fun appliquerFiltrageCombiné() {
+            val texte = rechercheInput.text.toString()
+            val artiste = dropdownArtiste.text.toString()
+            val genre = dropdownGenre.text.toString()
+            chansonViewModel.rechercherParCriteres(texte, artiste, genre)
+        }
+
+        // Observer les artistes
+        artisteViewModel.artistes.observe(this) { listeArtistes ->
+            artistes = listeArtistes
+            val nomsArtistes = listeArtistes.map { it.nom }
+            val adapterArtiste = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, nomsArtistes)
+            dropdownArtiste.setAdapter(adapterArtiste)
+        }
+
+        // Observer les genres
+        genreViewModel.genres.observe(this) { listeGenres ->
+            genres = listeGenres
+            val nomsGenres = listeGenres.map { it.nom }
+            val adapterGenre = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, nomsGenres)
+            dropdownGenre.setAdapter(adapterGenre)
+        }
+
+        // Observer les chansons principales pour afficher tout au départ si champ vide
+        chansonViewModel.chansons.observe(this) { chansons ->
+            val texteRecherche = rechercheInput.text.toString()
+            if (texteRecherche.isBlank()) {
+                chansonViewModel.rechercherParNom("")
+            }
+        }
+
+        // Recherche par nom
+        rechercheInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                appliquerFiltrageCombiné()
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        // Appels sur les dropdowns aussi
+        dropdownArtiste.setOnItemClickListener { _, _, _, _ ->
+            appliquerFiltrageCombiné()
+        }
+        dropdownGenre.setOnItemClickListener { _, _, _, _ ->
+            appliquerFiltrageCombiné()
+        }
+
+        // Fonctionnalité du bouton Clear : réinitialise tous les champs et recharge les chansons
+        val btnClear = findViewById<Button>(R.id.btnClear)
+        btnClear.setOnClickListener {
+            rechercheInput.setText("")
+            dropdownArtiste.setText("", false)
+            dropdownGenre.setText("", false)
+            appliquerFiltrageCombiné()
+        }
+
+        // Observer les résultats filtrés et mettre à jour le RecyclerView
+        chansonViewModel.chansonsFiltrees.observe(this) { chansonsFiltrees ->
+            recyclerView.adapter = ChansonAdapter(
+                chansonsFiltrees,
+                chansonViewModel,
+                artistes ?: emptyList(),
+                genres ?: emptyList()
+            )
+        }
+
+        // Observer les messages d'erreur pour afficher un toast
+        chansonViewModel.messageErreur.observe(this) { message ->
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
 
         //les fonctionnalités des boutons
         val btnEnvoyer1 = findViewById<Button>(R.id.btnProfile)
@@ -104,60 +180,6 @@ class PageLibrarie : AppCompatActivity() {
             Log.d(ContentValues.TAG, "btnEnvoyer onClick revenir page formulaire")
             val intent = Intent(this, PageFormulaire::class.java)
             pageFormulaireLauncher.launch(intent)
-        }
-
-        // Initialiser le RecyclerView
-        recyclerView = findViewById(R.id.recyclerViewListe)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        // Observer les artistes
-        artisteViewModel.artistes.observe(this) {
-            artistes = it
-        }
-
-        // Observer les chansons principales pour afficher tout au départ si champ vide
-        val rechercheInput = findViewById<EditText>(R.id.rechercheInput)
-        chansonViewModel.chansons.observe(this) { chansons ->
-            val texteRecherche = rechercheInput.text.toString()
-            if (texteRecherche.isBlank()) {
-                chansonViewModel.rechercherParNom("")
-            }
-        }
-
-        // Observer les genres
-        genreViewModel.genres.observe(this) {
-            genres = it
-        }
-
-        // Ajout de la recherche par nom de chanson avec appel au ViewModel
-        // Déclaration du champ de recherche (déjà déclaré ci-dessous)
-        rechercheInput.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                val texte = s.toString()
-                // Si le champ est vide, on recharge toutes les chansons
-                if (texte.isBlank()) {
-                    chansonViewModel.rechercherParNom("")
-                } else {
-                    chansonViewModel.rechercherParNom(texte)
-                }
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
-
-        // Observer les résultats filtrés et mettre à jour le RecyclerView
-        chansonViewModel.chansonsFiltrees.observe(this) { chansonsFiltrees ->
-            recyclerView.adapter = ChansonAdapter(
-                chansonsFiltrees,
-                chansonViewModel,
-                artistes ?: emptyList(),
-                genres ?: emptyList()
-            )
-        }
-
-        // Observer les messages d'erreur pour afficher un toast
-        chansonViewModel.messageErreur.observe(this) { message ->
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
     }
 }
