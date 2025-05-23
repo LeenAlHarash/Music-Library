@@ -24,4 +24,5 @@
     <string name="modifier">Modifier</string>
     <string name="modification_d_une_chanson">Modification d\'une chanson</string>
     <string name="message_success_modification">La modification a été effectué avec succès!</string>
+    <string name="message_aucune_chanson">Aucune chanson trouvée</string>
 </resources>

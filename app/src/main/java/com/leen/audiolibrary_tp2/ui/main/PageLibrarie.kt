@@ -7,6 +7,10 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.EditText
+import android.text.TextWatcher
+import android.text.Editable
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -61,21 +65,12 @@ class PageLibrarie : AppCompatActivity() {
     private val artisteViewModel: ArtisteViewModel by viewModels()
     private val genreViewModel: GenreViewModel by viewModels()
 
-    // ecyclerView pour afficher la liste des chansons
+    // RecyclerView pour afficher la liste des chansons
     private lateinit var recyclerView: RecyclerView
 
     // Variables temporaires pour stocker les données avant de les passer à l'adapter
-    private var chansons: List<ChansonAvecArtisteGenre>? = null
     private var artistes: List<Artiste>? = null
     private var genres: List<Genre>? = null
-
-    // Fonction qui met à jour le RecyclerView seulement si les 3 listes sont prêtes
-    private fun mettreAJourRecyclerView() {
-        if (chansons != null && artistes != null && genres != null) {
-            val adapter = ChansonAdapter(chansons!!, chansonViewModel, artistes!!, genres!!)
-            recyclerView.adapter = adapter
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +82,6 @@ class PageLibrarie : AppCompatActivity() {
         autoCompleteTextView.setAdapter(adapterItems)
 
         //les fonctionnalités des boutons
-        //Page Profile
         val btnEnvoyer1 = findViewById<Button>(R.id.btnProfile)
         btnEnvoyer1.setOnClickListener {
             Log.d(ContentValues.TAG, "btnEnvoyer onClick revenir page profile")
@@ -95,10 +89,8 @@ class PageLibrarie : AppCompatActivity() {
             mainActivityLauncher.launch(intent)
         }
 
-        //Page Accueil
         val btnEnvoyer2 = findViewById<Button>(R.id.btnAccueil)
         btnEnvoyer2.setOnClickListener {
-            //récupérer le nom sauvegardé
             val prefs = getSharedPreferences("prefs", MODE_PRIVATE)
             val nom = prefs.getString("nom", "") ?: ""
             Log.d(ContentValues.TAG, "btnEnvoyer2 onClick : nom = $nom")
@@ -107,7 +99,6 @@ class PageLibrarie : AppCompatActivity() {
             pageAccueilLauncher.launch(intent)
         }
 
-        //Page Formulaire
         val btnEnvoyer3 = findViewById<Button>(R.id.btnFormulaire)
         btnEnvoyer3.setOnClickListener {
             Log.d(ContentValues.TAG, "btnEnvoyer onClick revenir page formulaire")
@@ -119,22 +110,54 @@ class PageLibrarie : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerViewListe)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Observer les chansons
-        chansonViewModel.chansons.observe(this) {
-            chansons = it
-            mettreAJourRecyclerView()
-        }
-
         // Observer les artistes
         artisteViewModel.artistes.observe(this) {
             artistes = it
-            mettreAJourRecyclerView()
+        }
+
+        // Observer les chansons principales pour afficher tout au départ si champ vide
+        val rechercheInput = findViewById<EditText>(R.id.rechercheInput)
+        chansonViewModel.chansons.observe(this) { chansons ->
+            val texteRecherche = rechercheInput.text.toString()
+            if (texteRecherche.isBlank()) {
+                chansonViewModel.rechercherParNom("")
+            }
         }
 
         // Observer les genres
         genreViewModel.genres.observe(this) {
             genres = it
-            mettreAJourRecyclerView()
+        }
+
+        // Ajout de la recherche par nom de chanson avec appel au ViewModel
+        // Déclaration du champ de recherche (déjà déclaré ci-dessous)
+        rechercheInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val texte = s.toString()
+                // Si le champ est vide, on recharge toutes les chansons
+                if (texte.isBlank()) {
+                    chansonViewModel.rechercherParNom("")
+                } else {
+                    chansonViewModel.rechercherParNom(texte)
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        // Observer les résultats filtrés et mettre à jour le RecyclerView
+        chansonViewModel.chansonsFiltrees.observe(this) { chansonsFiltrees ->
+            recyclerView.adapter = ChansonAdapter(
+                chansonsFiltrees,
+                chansonViewModel,
+                artistes ?: emptyList(),
+                genres ?: emptyList()
+            )
+        }
+
+        // Observer les messages d'erreur pour afficher un toast
+        chansonViewModel.messageErreur.observe(this) { message ->
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
     }
 }
