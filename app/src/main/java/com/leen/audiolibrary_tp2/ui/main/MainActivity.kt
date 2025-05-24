@@ -3,8 +3,6 @@ package com.leen.audiolibrary_tp2.ui.main
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -22,7 +20,7 @@ class MainActivity : BaseActivity() {
     //pour appeler la page accueil
     private val pageAccueilLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ) { result ->
+    ) { result -> //si le résultat est ok, on peut appeler les données
         if (result.resultCode == RESULT_OK){
             val retour = result.data?.getStringExtra("resultat")
             Log.d(ContentValues.TAG, "Résultat: $retour")
@@ -71,7 +69,6 @@ class MainActivity : BaseActivity() {
         }
 
 
-
         // Gestion de la langue avec le Spinner (utilise string-array dans arrays.xml)
         val languageSpinner = findViewById<Spinner>(R.id.languageSpinner)
         val langCodes = resources.getStringArray(R.array.langues_disponibles).toList()
@@ -101,22 +98,24 @@ class MainActivity : BaseActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
+
         //Pour sauvegarder le nom inséré au lancement de l'application
-        val inputNom = findViewById<EditText>(R.id.nameSpace)
-        val nom = prefs.getString(PREFS_KEY_NOM, "")
-        inputNom.setText(nom)
+        val inputNom = findViewById<EditText>(R.id.nameSpace) //récupérer l'input de l'utilisateur
+        val nom = prefs.getString(PREFS_KEY_NOM, "") //récupérer le nom sauvegardé ^^
+        inputNom.setText(nom) //afficher le nom
+
         inputNom.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(nom: Editable?) {
+            override fun afterTextChanged(nom: Editable?) { //permet de sauvegarder le nom à chaque modification
                 Log.d("MainActivity", "afterTextChanged : $nom")
-                prefs.edit().putString(PREFS_KEY_NOM, nom.toString()).apply()
+                prefs.edit().putString(PREFS_KEY_NOM, nom.toString()).apply() //sauvegarder le nom
             }
         })
 
         //Pour passer à la page d'accueil
-        val btnEnvoyer = findViewById<Button>(R.id.btnSaveProfile)
-        val afficherNom = findViewById<EditText>(R.id.nameSpace)
+        val btnEnvoyer = findViewById<Button>(R.id.btnSaveProfile) //récupérer le bouton
+        val afficherNom = findViewById<EditText>(R.id.nameSpace) //récupérer l'input de l'utilisateur
 
         //listener pour le bouton
         btnEnvoyer.setOnClickListener {
@@ -126,9 +125,9 @@ class MainActivity : BaseActivity() {
                 Toast.makeText(this, getString(R.string.toastProfile), Toast.LENGTH_SHORT).show()
             } else {
                 Log.d(ContentValues.TAG, "btnEnvoyer onClick : $nom")
-                val intent = Intent(this, PageAccueil::class.java)
-                intent.putExtra("nom", nom)
-                pageAccueilLauncher.launch(intent)
+                val intent = Intent(this, PageAccueil::class.java) //on appelle la page d'accueil
+                intent.putExtra("nom", nom) //on passe le nom à la page d'accueil
+                pageAccueilLauncher.launch(intent) //on lance la page d'accueil
             }
         }
     }

@@ -60,7 +60,7 @@
         android:layout_width="240dp"
         android:layout_height="48dp"
         android:ems="10"
-        android:hint="nom de la chanson?"
+        android:hint=" "
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="@+id/tv_nom_chanson"
         app:layout_constraintStart_toStartOf="@+id/spinner_artiste"

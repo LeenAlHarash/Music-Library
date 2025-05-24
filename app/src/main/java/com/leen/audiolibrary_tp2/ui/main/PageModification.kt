@@ -11,7 +11,6 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import com.leen.audiolibrary_tp2.R
 import com.leen.audiolibrary_tp2.data.Artiste
 import com.leen.audiolibrary_tp2.data.Genre
@@ -32,7 +31,7 @@ class PageModification : BaseActivity() {
     val genreViewModel : GenreViewModel by viewModels()
     val artisteViewModel : ArtisteViewModel by viewModels()
 
-    // pour appeler les pages
+    // pour appeler les pages: profile, accueil, librarie
     private val mainActivityLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -86,6 +85,7 @@ class PageModification : BaseActivity() {
             chansonViewModel.chercherChansonParId(chansonId)
         }
 
+
         // Les fonctionnalités des boutons
         //Page Profile
         val btnEnvoyer1 = findViewById<Button>(R.id.btnProfile)
@@ -98,9 +98,8 @@ class PageModification : BaseActivity() {
         //Page Accueil
         val btnEnvoyer2 = findViewById<Button>(R.id.btnAccueil)
         btnEnvoyer2.setOnClickListener {
-            //récupérer le nom sauvegardé
-            val prefs = getSharedPreferences("prefs", MODE_PRIVATE)
-            val nom = prefs.getString("nom", "") ?: ""
+            val prefs = getSharedPreferences("prefs", MODE_PRIVATE) //récupérer le nom sauvegardé
+            val nom = prefs.getString("nom", "") ?: "" //récupérer le nom sauvegardé sinon un string vide
             Log.d(ContentValues.TAG, "btnEnvoyer2 onClick : nom = $nom")
             val intent = Intent(this, PageAccueil::class.java)
             intent.putExtra("nom", nom)

@@ -13,12 +13,10 @@ import android.text.Editable
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.leen.audiolibrary_tp2.R
 import com.leen.audiolibrary_tp2.data.Artiste
-import com.leen.audiolibrary_tp2.data.ChansonAvecArtisteGenre
 import com.leen.audiolibrary_tp2.data.Genre
 import com.leen.audiolibrary_tp2.ui.chansons.ChansonAdapter
 import com.leen.audiolibrary_tp2.viewmodel.ArtisteViewModel
@@ -27,15 +25,14 @@ import com.leen.audiolibrary_tp2.viewmodel.GenreViewModel
 
 class PageLibrarie : BaseActivity() {
     // JASKARAN: pour le dropdown menu : https://www.youtube.com/watch?v=jXSNobmB7u4&ab_channel=FineGap
-    // ^^ ou voir example brocoli, plus facile
 
-    //pour appeler les pages
+    //pour appeler les pages: profile, accueil, formulaire
     private val mainActivityLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ) { result ->
+    ) { result -> //si le résultat est ok, on peut appeler les données
         if (result.resultCode == RESULT_OK){
-            val retour = result.data?.getStringExtra("resultat")
-            Log.d(ContentValues.TAG, "Résultat: $retour")
+            val retour = result.data?.getStringExtra("resultat") //récupérer le résultat
+            Log.d(ContentValues.TAG, "Résultat: $retour") //afficher le résultat dans la console
         }
     }
 
@@ -157,20 +154,21 @@ class PageLibrarie : BaseActivity() {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
 
+
         //les fonctionnalités des boutons
         val btnEnvoyer1 = findViewById<Button>(R.id.btnProfile)
         btnEnvoyer1.setOnClickListener {
             Log.d(ContentValues.TAG, "btnEnvoyer onClick revenir page profile")
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java) //on appelle la page profile
             mainActivityLauncher.launch(intent)
         }
 
         val btnEnvoyer2 = findViewById<Button>(R.id.btnAccueil)
         btnEnvoyer2.setOnClickListener {
             val prefs = getSharedPreferences("prefs", MODE_PRIVATE)
-            val nom = prefs.getString("nom", "") ?: ""
-            Log.d(ContentValues.TAG, "btnEnvoyer2 onClick : nom = $nom")
-            val intent = Intent(this, PageAccueil::class.java)
+            val nom = prefs.getString("nom", "") ?: "" //récupérer le nom sauvegardé sinon un string vide
+            Log.d(ContentValues.TAG, "btnEnvoyer2 onClick : nom = $nom") //afficher le nom dans la console
+            val intent = Intent(this, PageAccueil::class.java) //on appelle la page accueil
             intent.putExtra("nom", nom)
             pageAccueilLauncher.launch(intent)
         }
@@ -178,7 +176,7 @@ class PageLibrarie : BaseActivity() {
         val btnEnvoyer3 = findViewById<Button>(R.id.btnFormulaire)
         btnEnvoyer3.setOnClickListener {
             Log.d(ContentValues.TAG, "btnEnvoyer onClick revenir page formulaire")
-            val intent = Intent(this, PageFormulaire::class.java)
+            val intent = Intent(this, PageFormulaire::class.java) //on appelle la page formulaire
             pageFormulaireLauncher.launch(intent)
         }
     }

@@ -45,6 +45,7 @@ class ExampleInstrumentedTest {
         db.close()
     }
 
+    //Test pour supprimer une chanson
     @Test
     fun testSupprimerChanson() = runBlocking {
 
@@ -81,7 +82,6 @@ class ExampleInstrumentedTest {
     }
 
 
-
     // Test pour ajouter une chanson
     @Test
     fun testAjouterChanson() = runBlocking {
@@ -111,6 +111,7 @@ class ExampleInstrumentedTest {
         // Recharger la base de données
         chansons = daoChanson.getAllForTests()
     }
+
 
     // Test pour modifier une chanson
     @Test
@@ -187,8 +188,4 @@ class ExampleInstrumentedTest {
         // Vérifier qu'aucune chanson ne correspond
         Assert.assertTrue(noMatchResult.isEmpty())
     }
-
-
-
-
 }

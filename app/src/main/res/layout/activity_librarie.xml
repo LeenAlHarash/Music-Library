@@ -81,14 +81,14 @@
 
     <Button
         android:id="@+id/btnClear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/reinitialiser"
-        android:contentDescription="@string/bouton_reinitialiser_desc"
+        android:layout_width="125dp"
+        android:layout_height="38dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutGenre"
+        android:contentDescription="@string/bouton_reinitialiser_desc"
+        android:text="@string/reinitialiser"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutGenre" />
 
     <TextView
         android:id="@+id/tvListe"

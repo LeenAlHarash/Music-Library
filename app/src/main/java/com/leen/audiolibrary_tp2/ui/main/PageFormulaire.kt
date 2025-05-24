@@ -11,7 +11,6 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import com.leen.audiolibrary_tp2.R
 import com.leen.audiolibrary_tp2.data.Artiste
 import com.leen.audiolibrary_tp2.data.Genre
@@ -36,28 +35,28 @@ class PageFormulaire : BaseActivity() {
     // pour appeler les pages
     private val mainActivityLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ) { result ->
+    ) { result -> //si le résultat est ok, on peut appeler les données
         if (result.resultCode == RESULT_OK){
-            val retour = result.data?.getStringExtra("resultat")
-            Log.d(ContentValues.TAG, "Résultat: $retour")
+            val retour = result.data?.getStringExtra("resultat") //récupérer le résultat
+            Log.d(ContentValues.TAG, "Résultat: $retour") //afficher le résultat dans la console
         }
     }
 
     private val pageAccueilLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ) { result ->
+    ) { result -> //si le résultat est ok, on peut appeler les données
         if (result.resultCode == RESULT_OK){
-            val retour = result.data?.getStringExtra("resultat")
-            Log.d(ContentValues.TAG, "Résultat: $retour")
+            val retour = result.data?.getStringExtra("resultat") //récupérer le résultat
+            Log.d(ContentValues.TAG, "Résultat: $retour") //afficher le résultat dans la console
         }
     }
 
     private val pageLibrarieLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ) { result ->
+    ) { result -> //si le résultat est ok, on peut appeler les données
         if (result.resultCode == RESULT_OK){
-            val retour = result.data?.getStringExtra("resultat")
-            Log.d(ContentValues.TAG, "Résultat: $retour")
+            val retour = result.data?.getStringExtra("resultat") //récupérer le résultat
+            Log.d(ContentValues.TAG, "Résultat: $retour") //afficher le résultat dans la console
         }
     }
 
@@ -72,7 +71,6 @@ class PageFormulaire : BaseActivity() {
         val spinnerGenre = findViewById<Spinner>(R.id.spinner_genre)
         val btnAjouter = findViewById<Button>(R.id.btn_ajouter)
         val etNouvelleChanson : EditText = findViewById(R.id.et_nom_chanson)
-        /* val adapter = ChansonAdapter(emptyList(), chansonViewModel) */ // Pas besoins et ceci provoque un erreur
 
 
         //les fonctionnalités des boutons
@@ -81,7 +79,7 @@ class PageFormulaire : BaseActivity() {
         btnEnvoyer1.setOnClickListener {
             Log.d(ContentValues.TAG, "btnEnvoyer onClick revenir page profile")
             val intent = Intent(this, MainActivity::class.java)
-            mainActivityLauncher.launch(intent)
+            mainActivityLauncher.launch(intent) //on lance la page profile
         }
 
         //Page Accueil
@@ -89,11 +87,11 @@ class PageFormulaire : BaseActivity() {
         btnEnvoyer2.setOnClickListener {
             //récupérer le nom sauvegardé
             val prefs = getSharedPreferences("prefs", MODE_PRIVATE)
-            val nom = prefs.getString("nom", "") ?: ""
+            val nom = prefs.getString("nom", "") ?: "" //récupérer le nom sauvegardé ^^ sinon un string vide
             Log.d(ContentValues.TAG, "btnEnvoyer2 onClick : nom = $nom")
             val intent = Intent(this, PageAccueil::class.java)
             intent.putExtra("nom", nom)
-            pageAccueilLauncher.launch(intent)
+            pageAccueilLauncher.launch(intent) //on lance la page d'accueil
         }
 
         //Page Librarie
@@ -101,7 +99,7 @@ class PageFormulaire : BaseActivity() {
         btnEnvoyer3.setOnClickListener {
             Log.d(ContentValues.TAG, "btnEnvoyer onClick revenir page librarie")
             val intent = Intent(this, PageLibrarie::class.java)
-            pageLibrarieLauncher.launch(intent)
+            pageLibrarieLauncher.launch(intent) //on lance la page librarie
         }
 
         // Écouter pour le bouton Ajouter
