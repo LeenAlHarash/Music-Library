@@ -32,7 +32,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tvNameLabel"
         app:layout_constraintStart_toEndOf="@+id/tvNameLabel"
         app:layout_constraintTop_toTopOf="@+id/tvNameLabel"
-        app:layout_constraintVertical_bias="0.476" />
+        app:layout_constraintVertical_bias="0.52" />
 
     <Button
         android:id="@+id/btnSaveProfile"
@@ -43,27 +43,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNameLabel"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.100000024" />
 
 
     <Switch
         android:id="@+id/themeSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/theme_sombre"
-        app:layout_constraintTop_toBottomOf="@+id/btnSaveProfile"
+        android:layout_marginTop="18dp"
+        android:text="🌞"
+        app:layout_constraintEnd_toStartOf="@+id/languageSpinner"
+        app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/languageSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/themeSwitch"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="18dp"
+        android:entries="@array/langues_disponibles"
         app:layout_constraintEnd_toEndOf="parent"
-        android:entries="@array/langues_disponibles" />
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/moon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🌙"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toBottomOf="@+id/themeSwitch"
+        app:layout_constraintStart_toEndOf="@+id/themeSwitch"
+        app:layout_constraintTop_toTopOf="@+id/themeSwitch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
