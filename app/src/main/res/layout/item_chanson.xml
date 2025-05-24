@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="12dp"
-    android:background="?android:attr/colorBackground">
+    android:background="@drawable/background">
 
     <!-- Titre de la chanson -->
     <TextView
