@@ -19,7 +19,7 @@ import com.leen.audiolibrary_tp2.viewmodel.ArtisteViewModel
 import com.leen.audiolibrary_tp2.viewmodel.ChansonViewModel
 import com.leen.audiolibrary_tp2.viewmodel.GenreViewModel
 
-class PageFormulaire : AppCompatActivity() {
+class PageFormulaire : BaseActivity() {
 
     // Déclaration d'un singleton
     // Pertinent pour le message d'erreur

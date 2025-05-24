@@ -1,11 +1,12 @@
+
 <resources>
     <string name="app_name" translatable="false">Audio Library - TP2</string>
     <string name="bonjour">Bonjour %1$s !</string>
     <string name="toastProfile">Veuillez entrer un nom</string>
-    <string name="inserez_votre_nom">Inserez votre nom :</string>
+    <string name="inserez_votre_nom">Insérez votre nom :</string>
     <string name="sauvegarder">Sauvegarder</string>
     <string name="bienvenue">Bienvenue !</string>
-    <string name="voir_votre_librarie">Voir votre librarie</string>
+    <string name="voir_votre_librarie">Voir votre librairie</string>
     <string name="ajouter_une_chanson">Ajouter une chanson</string>
     <string name="profile_btn">Profil</string>
     <string name="accueil_btn">Accueil</string>
@@ -16,13 +17,24 @@
     <string name="genre_chanson_label" translatable="false">Genre :</string>
     <string name="ajouter_btn">Ajouter</string>
     <string name="message_exception">Erreur! Le nom de la chanson existe déjà</string>
-    <string name="message_success">La chanson a été ajouté avec succès!</string>
+    <string name="message_success">La chanson a été ajoutée avec succès!</string>
     <string name="aucun_genre_selectionne">Aucun genre sélectionné</string>
     <string name="aucun_artiste_selectionne">Aucun artiste sélectionné</string>
     <string name="message_erreur_artiste">Attention! Veuillez ajouter un artiste à votre chanson</string>
     <string name="message_erreur_genre">Attention! Veuillez ajouter un genre à votre chanson</string>
     <string name="modifier">Modifier</string>
-    <string name="modification_d_une_chanson">Modification d\'une chanson</string>
-    <string name="message_success_modification">La modification a été effectué avec succès!</string>
+    <string name="modification_d_une_chanson">Modifier une chanson</string>
+    <string name="message_success_modification">La modification a été effectuée avec succès!</string>
     <string name="message_aucune_chanson">Aucune chanson trouvée</string>
+
+    <!-- Thème et langue -->
+    <string name="theme_sombre">Thème sombre</string>
+    <string name="theme_clair">Thème clair</string>
+    <string name="choisir_langue">Choisir une langue</string>
+
+    <!-- Entrées du Spinner pour la sélection de langue -->
+    <string-array name="langues_disponibles">
+        <item>Français</item>
+        <item>English</item>
+    </string-array>
 </resources>

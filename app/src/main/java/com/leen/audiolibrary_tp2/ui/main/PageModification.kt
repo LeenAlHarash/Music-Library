@@ -19,7 +19,7 @@ import com.leen.audiolibrary_tp2.viewmodel.ArtisteViewModel
 import com.leen.audiolibrary_tp2.viewmodel.ChansonViewModel
 import com.leen.audiolibrary_tp2.viewmodel.GenreViewModel
 
-class PageModification : AppCompatActivity() {
+class PageModification : BaseActivity() {
 
     // Companion object pour mettre les attributs dans leurs éléments u.i respectives
     companion object {

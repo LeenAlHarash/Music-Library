@@ -45,4 +45,25 @@
         app:layout_constraintTop_toBottomOf="@+id/tvNameLabel"
         app:layout_constraintVertical_bias="0.15" />
 
+
+    <Switch
+        android:id="@+id/themeSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/theme_sombre"
+        app:layout_constraintTop_toBottomOf="@+id/btnSaveProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
+
+
+    <Spinner
+        android:id="@+id/languageSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/themeSwitch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:entries="@array/langues_disponibles" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.leen.audiolibrary_tp2.R
 
-class PageAccueil : AppCompatActivity() {
+class PageAccueil : BaseActivity() {
 
     //pour appeler la page formulaire et librarie
     private val pageFormulaireLauncher = registerForActivityResult(

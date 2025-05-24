@@ -25,7 +25,7 @@ import com.leen.audiolibrary_tp2.viewmodel.ArtisteViewModel
 import com.leen.audiolibrary_tp2.viewmodel.ChansonViewModel
 import com.leen.audiolibrary_tp2.viewmodel.GenreViewModel
 
-class PageLibrarie : AppCompatActivity() {
+class PageLibrarie : BaseActivity() {
     // JASKARAN: pour le dropdown menu : https://www.youtube.com/watch?v=jXSNobmB7u4&ab_channel=FineGap
     // ^^ ou voir example brocoli, plus facile
 

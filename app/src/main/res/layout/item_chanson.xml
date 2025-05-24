@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="12dp"
-    android:background="@android:color/white">
+    android:background="?android:attr/colorBackground">
 
     <!-- Titre de la chanson -->
     <TextView
@@ -14,7 +14,7 @@
         android:text="Titre de la chanson"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#000000" />
+        android:textColor="?android:attr/textColorPrimary" />
 
     <!-- Artiste + Genre + Buttons -->
     <LinearLayout
@@ -27,26 +27,26 @@
 
         <!-- Artiste & Genre -->
         <LinearLayout
-            android:layout_width="0.5dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textViewArtiste"
-                android:layout_width="261dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Artiste"
-                android:textColor="#555555"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/textViewGenre"
-                android:layout_width="262dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Genre"
-                android:textColor="#777777"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="13sp" />
         </LinearLayout>
 
