@@ -25,6 +25,17 @@
     <string name="modification_d_une_chanson">Modifying a song</string>
     <string name="message_success_modification">The modification was made successfully!</string>
     <string name="message_aucune_chanson">No song found</string>
+    <string name="recherche_label">Search:</string>
+    <string name="champ_recherche_desc">Song search input field</string>
+    <string name="filtrer_par_artiste">Filter by artist</string>
+    <string name="filtrer_par_genre">Filter by genre</string>
+    <string name="filtre_artiste_desc">Artist filter menu</string>
+    <string name="filtre_genre_desc">Genre filter menu</string>
+    <string name="reinitialiser">Reset</string>
+    <string name="bouton_reinitialiser_desc">Button to reset filters</string>
+    <string name="votre_librarie">Your Library</string>
+    <string name="liste_chansons_desc">List of songs</string>
+    <string name="formulaire">Form</string>
     <string name="theme_sombre">Dark theme</string>
     <string name="theme_clair">Light theme</string>
     <string name="choisir_langue">Choose a language</string>
