@@ -145,4 +145,50 @@ class ExampleInstrumentedTest {
         // Vérifier que la modification a été véritablement faite
         Assert.assertEquals(chansonModifier.nom, "Song B")
     }
+
+
+    // Test pour rechercher une chanson par nom
+    @Test
+    fun testRechercherChansonParNom() = runBlocking {
+
+        // Insérer deux artistes et deux genres
+        val artiste1 = Artiste(id = 1, nom = "Artist 1")
+        val artiste2 = Artiste(id = 2, nom = "Artist 2")
+        daoArtiste.insertAll(artiste1)
+        daoArtiste.insertAll(artiste2)
+
+        val genre1 = Genre(id = 1, nom = "Genre 1")
+        val genre2 = Genre(id = 2, nom = "Genre 2")
+        daoGenre.insertAll(genre1)
+        daoGenre.insertAll(genre2)
+
+        // Insertion de trois chansons avec des noms distincts
+        val chanson1 = Chanson(id = 1, nom = "Shape of You", artisteId = 1, genreId = 1)
+        val chanson2 = Chanson(id = 2, nom = "Believer", artisteId = 2, genreId = 2)
+        val chanson3 = Chanson(id = 3, nom = "Shallow", artisteId = 2, genreId = 2)
+        daoChanson.insert(chanson1)
+        daoChanson.insert(chanson2)
+        daoChanson.insert(chanson3)
+
+        // Rechercher une chanson par nom (case insensitive)
+        val result = daoChanson.getAllForTests().filter {
+            it.chanson.nom.contains("shallow", ignoreCase = true)
+        }
+
+        // Vérifier qu'une seule chanson correspond
+        Assert.assertEquals(1, result.size)
+        Assert.assertEquals("Shallow", result[0].chanson.nom)
+
+        // Rechercher une chanson inexistante
+        val noMatchResult = daoChanson.getAllForTests().filter {
+            it.chanson.nom.contains("Never Gonna Give You Up", ignoreCase = true)
+        }
+
+        // Vérifier qu'aucune chanson ne correspond
+        Assert.assertTrue(noMatchResult.isEmpty())
+    }
+
+
+
+
 }
