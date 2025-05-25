@@ -13,7 +13,6 @@
     <string name="saisir_nom_chanson_hint">Enter the name of the song</string>
     <string name="artiste_label">Artist :</string>
     <string name="nom_chanson_label">Name :</string>
-    <string name="genre_chanson_label" translatable="false">Genre :</string>
     <string name="ajouter_btn">Add</string>
     <string name="message_exception">Error! The song name already exists</string>
     <string name="message_success">The song has been added successfully!</string>
@@ -36,7 +35,5 @@
     <string name="votre_librarie">Your Library</string>
     <string name="liste_chansons_desc">List of songs</string>
     <string name="formulaire">Form</string>
-    <string name="theme_sombre">Dark theme</string>
-    <string name="theme_clair">Light theme</string>
     <string name="choisir_langue">Choose a language</string>
 </resources>

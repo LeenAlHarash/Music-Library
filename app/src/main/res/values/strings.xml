@@ -37,8 +37,6 @@
     <string name="votre_librarie">Votre Librarie</string>
     <string name="liste_chansons_desc">Liste des chansons</string>
     <string name="formulaire">Formulaire</string>
-    <string name="theme_sombre">Thème sombre</string>
-    <string name="theme_clair">Thème clair</string>
     <string name="choisir_langue">Choisir une langue</string>
     <string-array name="langues_disponibles">
         <item>Français</item>

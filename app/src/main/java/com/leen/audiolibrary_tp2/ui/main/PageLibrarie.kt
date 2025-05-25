@@ -10,6 +10,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.text.TextWatcher
 import android.text.Editable
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -113,14 +115,25 @@ class PageLibrarie : BaseActivity() {
             }
         }
 
-        // Recherche par nom
-        rechercheInput.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
+        // Recherche seulement quand on appuie sur "Enter"
+        rechercheInput.setOnEditorActionListener { _, actionId, event ->
+            // Si l'action est completé et on a cliqué sur "Enter"
+            if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
                 appliquerFiltrageCombiné()
+                true // Traiter l'événement (afficher les résultats)
+            } else {
+                false // Ne pas traiter l'événement (ne changer rien)
             }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
+        }
+
+        // Recherche par nom dyanmique fait par Jaskaran : cause des erreurs avec le toast
+//        rechercheInput.addTextChangedListener(object : TextWatcher {
+//            override fun afterTextChanged(s: Editable?) {
+//                appliquerFiltrageCombiné()
+//            }
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+//        })
 
         // Appels sur les dropdowns aussi
         dropdownArtiste.setOnItemClickListener { _, _, _, _ ->
@@ -150,8 +163,8 @@ class PageLibrarie : BaseActivity() {
         }
 
         // Observer les messages d'erreur pour afficher un toast
-        chansonViewModel.messageErreur.observe(this) { message ->
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        chansonViewModel.messageErreur.observe(this) {
+            Toast.makeText(this, getString(R.string.message_aucune_chanson), Toast.LENGTH_SHORT).show()
         }
 
 
