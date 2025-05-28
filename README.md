@@ -1,31 +1,17 @@
-# Audio Library - TP2 
+# Music-Library 🎶
 
-## Membres de l'équipe Colibri 🕊
+## Description
+A modern Android music app built in Kotlin with support for English and French languages. Users can browse a music library, filter songs by artist or genre, search by name, toggle dark mode, and switch languages dynamically. Built using MVVM architecture, Room, LiveData, RecyclerView, and SharedPreferences.
+
+## Authors
 - Leen Al Harash
-- Mariyam Hanfaoui
-- Jaskaran Singh
+- [Mariyam Hanfaoui](https://github.com/hmariyam)
+- [Jaskaran Singh](https://github.com/issjayjay)
 
-## Mode de communication 🌎
-- Discord
-- Teams
+## Future Improvements
+- Improve the dark mode switch to ensure a smoother transition without flickering or requiring multiple taps. Currently, toggling between themes can cause unexpected UI glitches or reinitializations.
 
-## Lien vers le projet 🔗
-- [TP2 - Colibri](https://git.dti.crosemont.quebec/lal/tp2-colibri)
-
-## La personne contacte de l'équipe 🙎‍♀️
-- Leen Al Harash
-
-## Le type d'application 📱
-- Gestionnaire de listes de lecture musicales
-
-## Description de chaque fonctionnalité et son responsable 
-| Personne responsable | Description détaillée de la fonctionnalité |
-| ------------- | ------------- |
-| Leen | - Création de la page Profile<br/> - Création de la page accueil<br /> - Création de la page modifier une chanson<br/> - Internalisation de ces trois pages<br/> - Création de la page librarie<br /> - Création de la page formulaire<br/> - Liaison entre toutes les pages<br/> - Supprimer une chanson<br /> - Tests Unitaires (supprimer)|
-| Mariyam |  - Internalisation du formulaire<br /> - Ajouter une chanson <br/> - Modification d'une chanson<br /> - Tests Unitaires (Modifier et ajouter un chanson)<br /> - Création des tables SQL<br/> - Création de diagramme Mermaid|
-| Jaskaran | - Afficher la liste des chansons (recyclerView)<br /> - Internalisation des chansons (librarie)<br /> - Fonction Recherche par nom de la chanson<br />  - Tests Unitaires (pour rechercher)<br /> - Filtre par genre et par artist<br /> - Thème sombre et clair|
-
-# Diagramme Mermaid - AudioLibrary
+## Diagramme Mermaid
 
 ````mermaid
 erDiagram
@@ -46,3 +32,6 @@ erDiagram
         string nom
     }
 ````
+
+## LICENSE
+- [MIT](https://choosealicense.com/licenses/mit/)
