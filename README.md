@@ -6,7 +6,7 @@ A modern Android music app built in Kotlin with support for English and French l
 ## Authors
 - Leen Al Harash
 - [Mariyam Hanfaoui](https://github.com/hmariyam)
-- [Jaskaran Singh]()
+- [Jaskaran Singh](https://github.com/issjayjay)
 
 ## Future Improvements
 - Improve the dark mode switch to ensure a smoother transition without flickering or requiring multiple taps. Currently, toggling between themes can cause unexpected UI glitches or reinitializations.
